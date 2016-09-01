@@ -3,8 +3,6 @@ package com.stuart.fileexplorer.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,18 +102,26 @@ public class CategoryFragment extends BaseFragment {
     }
 
     private void showListFile(boolean show) {
-        mListViewFile.setVisibility(show ? View.VISIBLE :View.GONE);
-        mListViewCategory.setVisibility(!show ? View.VISIBLE :View.GONE);
+        mListViewFile.setVisibility(show ? View.VISIBLE : View.GONE);
+        mListViewCategory.setVisibility(!show ? View.VISIBLE : View.GONE);
     }
 
     private State mState = State.CATEGORY;
+
     private enum State {
-        CATEGORY, LIST
+        CATEGORY(1), LIST(2);
+
+        public int value;
+
+        State(int i) {
+            this.value = i;
+        }
     }
+
 
     @Override
     public boolean onBackPressed() {
-        if(mState == State.LIST) {
+        if (mState == State.LIST) {
 
             mState = State.CATEGORY;
 

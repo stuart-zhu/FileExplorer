@@ -14,4 +14,5 @@
     <string name="category_download">下载</string>
     <string name="category_apk">安装包</string>
     <string name="category_other">其他</string>
+    <string name="picturepage_no_file">当前没有文件可以查看</string>
 </resources>
