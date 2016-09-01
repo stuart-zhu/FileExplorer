@@ -13,7 +13,7 @@ import com.stuart.fileexplorer.R;
 /**
  * Created by lenovo on 2016/8/19.
  */
-public class FileListFragment extends Fragment{
+public class FileListFragment extends BaseFragment{
 
     private ListView mListView;
 

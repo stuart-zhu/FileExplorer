@@ -19,9 +19,11 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/category_icon"
+        android:layout_toLeftOf="@+id/category_count"
         android:paddingBottom="20dp"
         android:paddingTop="20dp"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:id="@+id/category_count"

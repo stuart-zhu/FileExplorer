@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.stuart.fileexplorer.R;
 import com.stuart.fileexplorer.entitiy.FileInfo;
-import com.stuart.fileexplorer.utils.FileUtils;
+import com.stuart.fileexplorer.utils.Utils;
 
 import java.io.File;
 import java.util.List;
@@ -20,15 +20,18 @@ import java.util.List;
  */
 public class FileListItemAdapter extends BaseAdapter {
 
-    private FileListItemAdapter() {}
+    private FileListItemAdapter() {
+    }
 
     private LayoutInflater inflater;
 
     private List<FileInfo> mList;
+
     public FileListItemAdapter(Context context, List<FileInfo> list) {
         inflater = LayoutInflater.from(context);
         mList = list;
     }
+
     @Override
     public int getCount() {
         return mList == null ? 0 : mList.size();
@@ -61,12 +64,12 @@ public class FileListItemAdapter extends BaseAdapter {
         if (file.isFile()) {
             vh.tvCount.setVisibility(View.GONE);
 
-        } else if (file.isDirectory()){
+        } else if (file.isDirectory()) {
             vh.iv.setImageResource(R.drawable.icon_folder);
             vh.tvCount.setVisibility(View.VISIBLE);
             vh.tvCount.setText(file.list().length);
         }
-        vh.tvSize.setText(FileUtils.formatFileSize(file.length()));
+        vh.tvSize.setText(Utils.formatFileSize(file.length()));
 //        vh.tvSize.setText(file.length());
         return null;
     }
@@ -74,6 +77,7 @@ public class FileListItemAdapter extends BaseAdapter {
     private class ViewHolder {
         ImageView iv;
         TextView tvName, tvSize, tvCount;
+
         public ViewHolder(View v) {
             iv = (ImageView) v.findViewById(R.id.file_icon);
             tvName = (TextView) v.findViewById(R.id.file_name);
