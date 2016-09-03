@@ -1,6 +1,7 @@
 package com.stuart.fileexplorer.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import android.widget.TextView;
 import com.lidroid.xutils.BitmapUtils;
 import com.stuart.fileexplorer.R;
 import com.stuart.fileexplorer.entitiy.FileInfo;
+import com.stuart.fileexplorer.manager.LoadImageTask;
+import com.stuart.fileexplorer.manager.TaskChooser;
+import com.stuart.fileexplorer.utils.FileUtils;
 import com.stuart.fileexplorer.utils.Utils;
 
 import java.util.List;
@@ -24,6 +28,8 @@ public class CategoryListItemAdapter extends BaseAdapter {
     private FileInfo.Category mCategory;
     private LayoutInflater mInflator;
     private Context mContext;
+
+    private Handler mHandler = new Handler();
 
     public CategoryListItemAdapter(Context context, List<FileInfo> list) {
         mContext = context;
@@ -50,51 +56,39 @@ public class CategoryListItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder vh;
+        final ViewHolder vh;
         if (view == null) {
-            view = mInflator.inflate(R.layout.category_item_layout, null);
+            view = mInflator.inflate(R.layout.category_list_item_layout, null);
             vh = new ViewHolder(view);
         } else {
             vh = (ViewHolder) view.getTag();
         }
 
-        FileInfo item = getItem(i);
-        BitmapUtils bu = new BitmapUtils(mContext);
-        switch (mCategory) {
-            case MUSIC:
-                break;
-            case DOCUMENT:
-                break;
-            case PICTURE:
-                bu.configDefaultLoadingImage(R.drawable.ic_fileexplorer_image_normal);
-                bu.configDefaultLoadFailedImage(R.drawable.ic_fileexplorer_image_normal);
-                bu.display(vh.iv, item.getFile().getAbsolutePath());
-                break;
-            case VIDEO:
-                break;
-            case OTHER:
-                break;
-            case APK:
-                break;
-            case DOWNLOAD:
-                break;
-        }
+        final FileInfo item = getItem(i);
+        TaskChooser chooser = TaskChooser.getTaskChooser();
+
+        chooser.addTask(new LoadImageTask(mContext,vh.iv, item.getFile(),item.getCategory()));
 
         vh.tvName.setText(item.getFile().getName());
         vh.tvCount.setText(Utils.formatFileSize(item.getFile().length()));
+        vh.tvChangeTime.setText(Utils.formatDate(item.getFile().lastModified()));
         return view;
     }
+
+
 
     private class ViewHolder {
 
         ImageView iv;
         TextView tvName;
         TextView tvCount;
+        TextView tvChangeTime;
 
         public ViewHolder(View v) {
             iv = (ImageView) v.findViewById(R.id.category_icon);
             tvName = (TextView) v.findViewById(R.id.category_name);
             tvCount = (TextView) v.findViewById(R.id.category_count);
+            tvChangeTime = (TextView) v.findViewById(R.id.category_change_time);
             v.setTag(this);
         }
     }

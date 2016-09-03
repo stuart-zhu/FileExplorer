@@ -1,6 +1,8 @@
 package com.stuart.fileexplorer.utils;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by lenovo on 2016/9/1.
@@ -8,6 +10,7 @@ import java.text.DecimalFormat;
 public class Utils {
 
     private static final int MEMORY_UNIT_CONVERSION = 1024;
+
     /**
      *
      */
@@ -33,5 +36,15 @@ public class Utils {
         }
         sizeFormat = null;
         return strBuffer.toString();
+    }
+
+    public static String formatDate(long time) {
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy.MM.dd  HH:mm");
+        if (time > 0) {
+            Date date = new Date(time);
+            return fmt.format(date);
+        }
+        return "未知";
+
     }
 }
