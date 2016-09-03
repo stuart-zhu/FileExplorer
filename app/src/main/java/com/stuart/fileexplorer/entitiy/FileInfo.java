@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.io.File;
 
 /**
- * Created by lenovo on 2016/8/30.
+ * Created by stuart on 2016/8/30.
  */
 public class FileInfo implements Parcelable {
 

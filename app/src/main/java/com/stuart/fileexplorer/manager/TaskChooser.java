@@ -1,13 +1,15 @@
 package com.stuart.fileexplorer.manager;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 /**
- * Created by lenovo on 2016/9/2.
+ * Created by stuart on 2016/9/2.
  */
 public class TaskChooser {
 
@@ -25,7 +27,7 @@ public class TaskChooser {
 
     public void addTask(LoadImageTask list) {
         if (mTask == null) {
-           mTask = new Stack<>();
+            mTask = new Stack<>();
         }
         if (!mTask.contains(list))
             mTask.push(list);

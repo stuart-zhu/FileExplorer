@@ -14,7 +14,7 @@ import com.stuart.fileexplorer.entitiy.FileCategoryInfo;
 import java.util.List;
 
 /**
- * Created by lenovo on 2016/8/30.
+ * Created by stuart on 2016/8/30.
  */
 public class CategoryItemAdapter extends BaseAdapter {
 

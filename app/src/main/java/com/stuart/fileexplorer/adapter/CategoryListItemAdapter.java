@@ -20,7 +20,7 @@ import com.stuart.fileexplorer.utils.Utils;
 import java.util.List;
 
 /**
- * Created by lenovo on 2016/9/1.
+ * Created by stuart on 2016/9/1.
  */
 public class CategoryListItemAdapter extends BaseAdapter {
 

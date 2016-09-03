@@ -16,7 +16,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Created by lenovo on 2016/8/31.
+ * Created by stuart on 2016/8/31.
  */
 public class FileListItemAdapter extends BaseAdapter {
 

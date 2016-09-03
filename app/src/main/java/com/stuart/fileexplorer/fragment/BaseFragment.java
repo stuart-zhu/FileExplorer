@@ -3,7 +3,7 @@ package com.stuart.fileexplorer.fragment;
 import android.support.v4.app.Fragment;
 
 /**
- * Created by lenovo on 2016/9/1.
+ * Created by stuart on 2016/9/1.
  */
 public class BaseFragment extends Fragment{
 
