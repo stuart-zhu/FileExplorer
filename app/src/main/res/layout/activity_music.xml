@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stuart="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_style_1">
+
+    <com.stuart.fileexplorer.widget.TitleView
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.stuart.fileexplorer.widget.TitleView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="#00000000">
+
+        <com.stuart.fileexplorer.widget.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/album_icon_bg"
+            stuart:civ_border_color="@android:color/transparent"
+            stuart:civ_padding_width="8dp" />
+
+        <com.stuart.fileexplorer.widget.CircleImageView
+            android:id="@+id/album_icon"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/sign"
+        android:layout_width="1px"
+        android:layout_height="1px"
+        android:layout_below="@+id/title_view"
+        android:layout_centerHorizontal="true"></View>
+
+    <RelativeLayout
+        android:id="@+id/hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sign"
+        android:layout_alignTop="@+id/sign"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="-15dp"
+            android:background="@drawable/icon_hand"></ImageView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="5dp">
+
+            <ImageView
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:src="@drawable/round_1" />
+
+            <ImageView
+                android:id="@+id/play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingBottom="5dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:paddingTop="5dp"
+                android:src="@drawable/bottom_play_selector" />
+
+            <ImageView
+                android:id="@+id/pre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/play"
+                android:padding="5dp"
+                android:src="@drawable/bottom_left_selector" />
+
+            <ImageView
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/play"
+                android:padding="5dp"
+                android:src="@drawable/bottom_right_selector" />
+
+
+            <ImageView
+                android:id="@+id/menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:src="@drawable/bottom_menu_selector" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

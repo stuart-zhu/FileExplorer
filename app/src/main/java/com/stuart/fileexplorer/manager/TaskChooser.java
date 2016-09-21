@@ -1,12 +1,10 @@
 package com.stuart.fileexplorer.manager;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.util.Log;
-import android.view.View;
-import android.widget.ListView;
 
+import java.util.Queue;
 import java.util.Stack;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by stuart on 2016/9/2.
@@ -15,7 +13,7 @@ public class TaskChooser {
 
     private static TaskChooser mInstacne;
 
-    private Stack<LoadImageTask> mTask;
+    private Queue<LoadImageTask> mTask;
 
     private LoadImageTask mCurrentLoadImageTask;
 
@@ -27,19 +25,18 @@ public class TaskChooser {
 
     public void addTask(LoadImageTask list) {
         if (mTask == null) {
-            mTask = new Stack<>();
+            mTask = new LinkedBlockingQueue<>();
         }
         if (!mTask.contains(list))
-            mTask.push(list);
+            mTask.offer(list);
         checkList();
     }
 
     private synchronized void checkList() {
         while (mTask.size() > 10) {
 
-            LoadImageTask remove = mTask.remove(0);
-
-            remove.cancle();
+            LoadImageTask task = mTask.poll();
+            task.cancle();
 
         }
 
@@ -49,7 +46,7 @@ public class TaskChooser {
         if (mTask.isEmpty()) {
             return;
         }
-        mCurrentLoadImageTask = mTask.pop();
+        mCurrentLoadImageTask = mTask.poll();
         mCurrentLoadImageTask.startOnLoadImageListener(new LoadImageTask.onLoadImageListener() {
             @Override
             public void onLoadStart() {

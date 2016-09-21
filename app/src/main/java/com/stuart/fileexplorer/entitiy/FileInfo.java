@@ -13,12 +13,14 @@ public class FileInfo implements Parcelable {
     private Category category = Category.OTHER;
 
     private File mFile;
+    private int id;
 
     private FileInfo() {
     }
 
-    public FileInfo(Category category, File mFile) {
+    public FileInfo(Category category, int id, File mFile) {
         this.category = category;
+        this.id = id;
         this.mFile = mFile;
     }
 
@@ -38,10 +40,19 @@ public class FileInfo implements Parcelable {
         this.mFile = mFile;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "{FileInfo" +
+        return "FileInfo{" +
                 "category=" + category +
+                ", id=" + id +
                 ", mFile=" + mFile +
                 '}';
     }
@@ -54,6 +65,7 @@ public class FileInfo implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(category.value);
+        parcel.writeInt(id);
         parcel.writeSerializable(mFile);
 
     }
@@ -99,8 +111,9 @@ public class FileInfo implements Parcelable {
             int i = parcel.readInt();
 
             Category category = getCategory(i);
+            int id = parcel.readInt();
             File file = (File) parcel.readSerializable();
-            return new FileInfo(category, file);
+            return new FileInfo(category, id, file);
         }
 
         @Override

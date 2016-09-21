@@ -15,4 +15,5 @@
     <string name="category_apk">安装包</string>
     <string name="category_other">其他</string>
     <string name="picturepage_no_file">当前没有文件可以查看</string>
+    <string name="no_file_play">当前没有可供播放的音乐</string>
 </resources>

@@ -9,12 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lidroid.xutils.BitmapUtils;
 import com.stuart.fileexplorer.R;
 import com.stuart.fileexplorer.entitiy.FileInfo;
 import com.stuart.fileexplorer.manager.LoadImageTask;
 import com.stuart.fileexplorer.manager.TaskChooser;
-import com.stuart.fileexplorer.utils.FileUtils;
 import com.stuart.fileexplorer.utils.Utils;
 
 import java.util.List;
@@ -67,14 +65,13 @@ public class CategoryListItemAdapter extends BaseAdapter {
         final FileInfo item = getItem(i);
         TaskChooser chooser = TaskChooser.getTaskChooser();
 
-        chooser.addTask(new LoadImageTask(mContext,vh.iv, item.getFile(),item.getCategory()));
+        chooser.addTask(new LoadImageTask(mContext, vh.iv, item.getFile(), item.getCategory()));
 
         vh.tvName.setText(item.getFile().getName());
         vh.tvCount.setText(Utils.formatFileSize(item.getFile().length()));
         vh.tvChangeTime.setText(Utils.formatDate(item.getFile().lastModified()));
         return view;
     }
-
 
 
     private class ViewHolder {

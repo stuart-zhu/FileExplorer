@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.stuart.fileexplorer.entitiy.FileInfo;
+import com.stuart.fileexplorer.entitiy.MusicFile;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,7 +65,9 @@ public class FileUtils {
             );
             List<FileInfo> list = new ArrayList<>();
             while (c != null && c.moveToNext()) {
-                list.add(new FileInfo(category, new File(c.getString(c.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATA)))));
+                list.add(new FileInfo(category,
+                        c.getInt(c.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)),
+                        new File(c.getString(c.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATA)))));
             }
             return list;
         } finally {
@@ -151,5 +154,34 @@ public class FileUtils {
             e.printStackTrace();
         }
         return f.getAbsolutePath();
+    }
+
+
+    public static MusicFile getMusicFile(Context context, int fileId) {
+        Cursor cursor = null;
+        try {
+            cursor =
+                    context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, MediaStore.Audio.Media._ID +"=?", new String[] {""+fileId}, /*MediaStore.Audio.Media.DEFAULT_SORT_ORDER*/ null);
+            if(cursor != null && cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
+
+                String tilte = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE));
+
+                String album = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+
+                String artist = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST));
+
+                String url = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
+
+                long duration = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));
+
+                long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));
+
+                return new MusicFile(id, tilte, album, artist, url, duration, size);
+            }
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+        return null;
     }
 }

@@ -1,7 +1,9 @@
 package com.stuart.fileexplorer.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.stuart.fileexplorer.adapter.CategoryItemAdapter;
 import com.stuart.fileexplorer.adapter.CategoryListItemAdapter;
 import com.stuart.fileexplorer.entitiy.FileCategoryInfo;
 import com.stuart.fileexplorer.entitiy.FileInfo;
+import com.stuart.fileexplorer.music.MusicPlayerActivity;
 import com.stuart.fileexplorer.utils.FileUtils;
 
 import java.util.ArrayList;
@@ -50,13 +53,44 @@ public class CategoryFragment extends BaseFragment {
             }
         });
 
+        mListViewFile.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (mCurrentCategory) {
+                    case MUSIC:
+                        Intent intent = new Intent(getActivity(), MusicPlayerActivity.class);
+                        Bundle b = new Bundle();
+                        b.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) mFiles);
+                        b.putParcelable("current", mFiles.get(i));
+                        intent.putExtra("music", b);
+                        startActivity(intent);
+                        break;
+
+                    case DOCUMENT:
+                        break;
+                    case PICTURE:
+                        break;
+                    case VIDEO:
+                        break;
+                    case DOWNLOAD:
+                        break;
+                    case APK:
+                        break;
+                    case OTHER:
+                        break;
+                }
+            }
+        });
+
         return view;
     }
 
+    private List<FileInfo> mFiles;
+
     private void showCategory() {
         mState = State.LIST;
-        List<FileInfo> allFile = FileUtils.getAllFile(getActivity(), mCurrentCategory);
-        CategoryListItemAdapter adapter = new CategoryListItemAdapter(getActivity(), allFile);
+        mFiles = FileUtils.getAllFile(getActivity(), mCurrentCategory);
+        CategoryListItemAdapter adapter = new CategoryListItemAdapter(getActivity(), mFiles);
         mListViewFile.setAdapter(adapter);
 
         showListFile(true);
