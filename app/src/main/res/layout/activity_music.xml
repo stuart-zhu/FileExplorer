@@ -5,11 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_style_1">
 
-    <com.stuart.fileexplorer.widget.TitleView
-        android:id="@+id/title_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.stuart.fileexplorer.widget.TitleView>
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,16 +39,21 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/sign"
         android:layout_alignTop="@+id/sign"
+        android:layout_marginTop="-15dp"
         android:layout_centerHorizontal="true">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="-15dp"
+
             android:background="@drawable/icon_hand"></ImageView>
     </RelativeLayout>
 
+    <com.stuart.fileexplorer.widget.TitleView
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.stuart.fileexplorer.widget.TitleView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

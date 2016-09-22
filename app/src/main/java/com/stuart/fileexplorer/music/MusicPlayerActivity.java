@@ -1,15 +1,15 @@
 package com.stuart.fileexplorer.music;
 
-import android.animation.Animator;
 import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.lidroid.xutils.BitmapUtils;
@@ -45,6 +45,11 @@ public class MusicPlayerActivity extends Activity {
     @ViewInject(R.id.hand)
     private RelativeLayout mHand;
 
+    private int state; // 1 播放 0， 暂停
+
+    @ViewInject(R.id.play)
+    private ImageView mPlay;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,12 @@ public class MusicPlayerActivity extends Activity {
 //        ss.getin
 
         setAlbum();
+        mPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeState();
+            }
+        });
     }
 
     private void setAlbum() {
@@ -88,12 +99,39 @@ public class MusicPlayerActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        new Handler().postDelayed(new Runnable() {
+       /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 s();
             }
-        }, 1000);
+        }, 1000);*/
+    }
+
+
+    private void changeState() {
+
+        if (state == 1) {
+            state = 0;
+        } else {
+            state = 1;
+        }
+        checkState();
+    }
+
+    private void checkState() {
+        Animation handAnima = null;
+
+        if (state == 0) {
+            handAnima = AnimationUtils.loadAnimation(this, R.anim.music_hand_down_anim);
+            mPlay.setImageResource(R.drawable.bottom_pause_selector);
+        } else if (state == 1) {
+            handAnima = AnimationUtils.loadAnimation(this, R.anim.music_hand_up_anim);
+            mPlay.setImageResource(R.drawable.bottom_play_selector);
+        }
+        if (handAnima != null) {
+            handAnima.setFillAfter(true);
+            mHand.startAnimation(handAnima);
+        }
     }
 
     private void s() {
@@ -110,7 +148,9 @@ public class MusicPlayerActivity extends Activity {
         set.play(anim).before(anim2);
         set.play(anim3).before(anim4) ;
         set.start();*/
-        /*Animation animation = AnimationUtils.loadAnimation(this, R.anim.music_hand_anim);
-        mHand.startAnimation(animation);*/
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.music_hand_up_anim);
+        animation.setFillAfter(true);
+        mHand.startAnimation(animation);
     }
 }
