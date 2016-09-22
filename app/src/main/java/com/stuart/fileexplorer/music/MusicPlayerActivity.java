@@ -80,6 +80,8 @@ public class MusicPlayerActivity extends Activity {
                 changeState();
             }
         });
+
+        checkState();
     }
 
     private void setAlbum() {
@@ -121,10 +123,10 @@ public class MusicPlayerActivity extends Activity {
     private void checkState() {
         Animation handAnima = null;
 
-        if (state == 0) {
+        if (state == 1) {
             handAnima = AnimationUtils.loadAnimation(this, R.anim.music_hand_down_anim);
             mPlay.setImageResource(R.drawable.bottom_pause_selector);
-        } else if (state == 1) {
+        } else if (state == 0) {
             handAnima = AnimationUtils.loadAnimation(this, R.anim.music_hand_up_anim);
             mPlay.setImageResource(R.drawable.bottom_play_selector);
         }
