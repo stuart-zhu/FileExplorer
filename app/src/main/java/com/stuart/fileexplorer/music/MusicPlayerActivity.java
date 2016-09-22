@@ -1,9 +1,16 @@
 package com.stuart.fileexplorer.music;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
@@ -34,6 +41,9 @@ public class MusicPlayerActivity extends Activity {
 
     @ViewInject(R.id.title_view)
     private TitleView mTitleView;
+
+    @ViewInject(R.id.hand)
+    private RelativeLayout mHand;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,5 +83,34 @@ public class MusicPlayerActivity extends Activity {
 //        bu.configDefaultLoadFailedImage(ResourceUtil.getDefalutImageRes(mCurrentFileInfo.getCategory()));
         bu.display(mAlbumIcon, albumPath);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                s();
+            }
+        }, 1000);
+    }
+
+    private void s() {
+        AnimatorSet set = new AnimatorSet() ;
+       /* ObjectAnimator anim = ObjectAnimator .ofFloat(mHand, "rotationX", 0f, 180f);
+        anim.setDuration(2000);
+        ObjectAnimator anim2 = ObjectAnimator .ofFloat(mHand, "rotationX", 180f, 0f);
+        anim2.setDuration(2000);
+        ObjectAnimator anim3 = ObjectAnimator .ofFloat(mHand, "rotationY", 0f, 180f);
+        anim3.setDuration(2000);
+        ObjectAnimator anim4 = ObjectAnimator .ofFloat(mHand, "rotationY", 180f, 0f);
+        anim4.setDuration(2000);
+
+        set.play(anim).before(anim2);
+        set.play(anim3).before(anim4) ;
+        set.start();*/
+        /*Animation animation = AnimationUtils.loadAnimation(this, R.anim.music_hand_anim);
+        mHand.startAnimation(animation);*/
     }
 }

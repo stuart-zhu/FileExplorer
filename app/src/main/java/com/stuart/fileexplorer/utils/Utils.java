@@ -1,5 +1,12 @@
 package com.stuart.fileexplorer.utils;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,6 +16,7 @@ import java.util.Date;
  */
 public class Utils {
 
+    private static final String TAG = "stuart - FM";
     private static final int MEMORY_UNIT_CONVERSION = 1024;
 
     /**
@@ -46,5 +54,24 @@ public class Utils {
         }
         return "未知";
 
+    }
+
+
+    public static Drawable getApkIcon(Context context, String apkPath) {
+        PackageManager pm;
+        pm = context.getPackageManager();
+        PackageInfo info = pm.getPackageArchiveInfo(apkPath,
+                PackageManager.GET_ACTIVITIES);
+        if (info != null) {
+            ApplicationInfo appInfo = info.applicationInfo;
+            appInfo.sourceDir = apkPath;
+            appInfo.publicSourceDir = apkPath;
+            try {
+                return appInfo.loadIcon(pm);
+            } catch (OutOfMemoryError e) {
+                Log.e(TAG, e.toString());
+            }
+        }
+        return null;
     }
 }

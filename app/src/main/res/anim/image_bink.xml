@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright(c) 2015 Yangzhou New Telecom Science & Technology Co., Ltd. All rights reserved. -->
+<set xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <alpha
+        android:fromAlpha="0.5"
+        android:toAlpha="1.0"
+        android:duration="500"
+        />
+</set>

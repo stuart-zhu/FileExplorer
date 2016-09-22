@@ -1,6 +1,9 @@
 package com.stuart.fileexplorer.manager;
 
+import android.content.Context;
 import android.util.Log;
+
+import com.stuart.fileexplorer.utils.BitmapCache;
 
 import java.util.Queue;
 import java.util.Stack;
@@ -30,6 +33,14 @@ public class TaskChooser {
         if (!mTask.contains(list))
             mTask.offer(list);
         checkList();
+    }
+
+    public void clearTask() {
+        while (mTask.size() > 0) {
+            LoadImageTask task = mTask.poll();
+            task.cancle();
+
+        }
     }
 
     private synchronized void checkList() {
